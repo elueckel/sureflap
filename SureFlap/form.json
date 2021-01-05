@@ -1,0 +1,48 @@
+  
+{
+    "elements":
+    [
+		{
+			"type": "Label",
+			"label": "Sureflap Configuration"
+		},
+		{
+			"type": "Label",
+			"label": "Please enter your Sureflap credentials and click on Initialize.\nThis will also add new pets once learned to the flapdoor."
+		},
+		{
+			"type": "ValidationTextBox",
+			"name": "UserName",
+			"caption": "User Name"
+		},
+		{
+			"type": "PasswordTextBox",
+			"name": "Password",
+			"caption": "Password"
+		},
+		{
+			"type": "NumberSpinner",
+			"name": "Timer",
+			"caption": "Update Frequency",
+			"suffix": "minutes - 0 is off"
+		}
+    ],
+	  "actions":
+	  [
+		{
+			"type": "Button",
+			"label": "Initialize",
+			"onClick": "SF_Initialize($id);"
+		},
+		{
+			"type": "Button",
+			"label": "Get Flap Status",
+			"onClick": "SF_GetCurfewStatus($id);"
+		},
+		{
+			"type": "Button",
+			"label": "Get Pet Location",
+			"onClick": "SF_GetPetLocation($id);"
+		}
+  	]
+}

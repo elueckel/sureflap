@@ -1,0 +1,15 @@
+{
+    "id": "{314F0950-A782-B6EF-78C7-8162A29E9566}",
+    "name": "SureFlap",
+    "type": 3,
+    "vendor": "Sureflap",
+    "aliases": 
+    [
+        "Katzenklappe",
+        "Haustierklappe"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "SF"
+}
