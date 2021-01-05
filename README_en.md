@@ -2,7 +2,7 @@
 The module allows to read data regarding the flapdoor for pets from Sureflap and to display this data within Symcon. It should be possible to also set status in case it is needed in the future.
 Credit goes to: https://github.com/alextoft/sureflap/ ... who did the ground work!!!
 
-## Konfiguration 1.00
+## Configuration 1.00
 The module requires a sureflap account where flapdoors and pets are setup - please follow the Sureflap instructions in that case. The module itself can be added via Module control or also via Module Store (future). The configuration is as follows
 
 1. Provide Username and Password from Sureflap
