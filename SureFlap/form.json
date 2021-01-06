@@ -24,7 +24,7 @@
 			"type": "NumberSpinner",
 			"name": "Timer",
 			"caption": "Update Frequency",
-			"suffix": "minutes - 0 is off"
+			"suffix": "seconds - 0 is off"
 		}
     ],
 	  "actions":
