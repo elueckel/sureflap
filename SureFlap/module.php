@@ -51,7 +51,7 @@ if (!defined('vtBoolean')) {
 		//Never delete this line!
 		parent::ApplyChanges();
 		
-		$TimerMS = $this->ReadPropertyInteger("Timer") * 60000;
+		$TimerMS = $this->ReadPropertyInteger("Timer") * 1000;
 		$this->SetTimerInterval("SureFlap Update",$TimerMS);
 					
 	}
