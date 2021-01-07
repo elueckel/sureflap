@@ -206,6 +206,7 @@ if (!defined('vtBoolean')) {
 			$this->RegisterVariableString($i.'Pet_ID', $this->Translate('Pet ').$i.$this->Translate(' ID'),'', $vpos++);
 			$this->RegisterVariableString($i.'Pet_Comment', $this->Translate('Pet ').$i.$this->Translate(' Comment'),'', $vpos++);
 			$this->RegisterVariableBoolean($i.'Pet_Location', $this->Translate('Pet ').$i.$this->Translate(' Location'),'SF.PetLocation', $vpos++);
+			$this->RegisterVariableString($i.'Pet_LastDetectedBy', $this->Translate('Pet ').$i.$this->Translate(' Last detected by'),'', $vpos++);
 			//$this->RegisterVariableString($i.'Pet_DOB', $this->Translate('Pet ').$i.$this->Translate(' DOB'),'', $vpos++);
 			//$this->RegisterVariableString($i.'Pet_Weight', $this->Translate('Pet ').$i.$this->Translate(' Weight'),'', $vpos++);
 			//$this->RegisterVariableString($i.'Pet_Gender', $this->Translate('Pet ').$i.$this->Translate(' Gender'),'', $vpos++);
@@ -262,15 +263,32 @@ if (!defined('vtBoolean')) {
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 				curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
 				$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
+				//var_dump ($result);
+
+				if (isset($result['data']['device_id'])) {
+					$Pet_LastDetectedBy = $result['data']['device_id'];
+					$ch = curl_init("https://app.api.surehub.io/api/device/".$Pet_LastDetectedBy);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
+					$result_device = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
+					$Pet_LastDetectedByName = $result_device['data']['name'];
+				}
+				else {
+					$Pet_LastDetectedByName = $this->Translate('No movement detected');
+				}
 
 				if($result['data']) {
 					if($result['data']['where']=="1") {
 						$location = "Inside";
 						SetValue($this->GetIDForIdent($i.'Pet_Location'), 1);
-						$this->SendDebug($this->Translate('Pet Location '),$Name.'Inside',0);
+						$this->SendDebug($this->Translate('Pet Location '),$Name.' Inside',0);
+						SetValue($this->GetIDForIdent($i.'Pet_LastDetectedBy'), $Pet_LastDetectedByName);
+						$this->SendDebug($this->Translate('Pet last detected by '),$Pet_LastDetectedByName,0);
 					} else {
 						SetValue($this->GetIDForIdent($i.'Pet_Location'), 0);
-						$this->SendDebug($this->Translate('Pet Location '),$Name.'Outside',0);
+						$this->SendDebug($this->Translate('Pet Location '),$Name.' Outside',0);
+						SetValue($this->GetIDForIdent($i.'Pet_LastDetectedBy'), $Pet_LastDetectedByName);
+						$this->SendDebug($this->Translate('Pet last detected by '),$Pet_LastDetectedByName,0);
 					}				
 				}
 

@@ -27,6 +27,8 @@
 			" Species": " Geschlecht",
 			" Comment": " Kommentar",
 			" Location": " Ort",
+			" Last detected by": " zuletzt erkannt von",
+			"No movement detected": "Noch keine Bewegung erkannt",
 			"Initialize": "Einrichten",
 			"Get Flap Status": "Klappe Abfragen",
 			"Get Pet Location": "Haustier Ort Abfragen"
