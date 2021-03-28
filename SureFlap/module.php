@@ -73,6 +73,7 @@ if (!defined('vtBoolean')) {
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_VERBOSE, 0);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json","Content-Length: ".strlen($json)));
 			$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
@@ -103,6 +104,7 @@ if (!defined('vtBoolean')) {
 		$ch = curl_init("https://app.api.surehub.io/api/household");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
 		$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
 
@@ -193,6 +195,7 @@ if (!defined('vtBoolean')) {
 		$ch = curl_init("https://app.api.surehub.io/api/household/$Household_ID/pet");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
 		$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
 		$this->RegisterVariableString('Pets', $this->Translate('Pets'),'', 40);
@@ -316,6 +319,7 @@ if (!defined('vtBoolean')) {
 		$ch = curl_init("https://app.api.surehub.io/api/household/$household/device?with[]=control");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
 		$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
 		//var_dump($result['data']);
