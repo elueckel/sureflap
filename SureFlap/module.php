@@ -265,13 +265,17 @@ if (!defined('vtBoolean')) {
 			else {
 				$Pet_ID = GetValue($this->GetIDForIdent ($i.'Pet_ID'));
 				$Name = GetValue($this->GetIDForIdent ($i.'Pet_Name'));
-
-				$ch = curl_init("https://app.api.surehub.io/api/pet/$Pet_ID/position");
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
-				$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
-				//var_dump ($result);
+				try {
+					$ch = curl_init("https://app.api.surehub.io/api/pet/$Pet_ID/position");
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
+					$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
+					//var_dump ($result);
+				}	
+				catch {
+					// nothing for now
+				}
 
 				if (isset($result['data']['device_id'])) {
 					$Pet_LastDetectedBy = $result['data']['device_id'];
@@ -315,7 +319,8 @@ if (!defined('vtBoolean')) {
 		$household = GetValue($this->GetIDForIdent ('Household_ID'));
 		$token = $this->GetBuffer("SureFlapToken");
 		//$flapname = GetValue($this->GetIDForIdent ('1Device_Name'));
-
+		
+		try {
 		$ch = curl_init("https://app.api.surehub.io/api/household/$household/device?with[]=control");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -323,6 +328,10 @@ if (!defined('vtBoolean')) {
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
 		$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
 		//var_dump($result['data']);
+		}	
+		catch {
+			// nothing for now
+		}
 
 		$i = 0; 
 
