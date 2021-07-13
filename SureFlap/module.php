@@ -273,7 +273,7 @@ if (!defined('vtBoolean')) {
 					$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
 					//var_dump ($result);
 				}	
-				catch {
+				catch (Exception $e) {
 					// nothing for now
 				}
 
@@ -329,7 +329,7 @@ if (!defined('vtBoolean')) {
 		$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
 		//var_dump($result['data']);
 		}	
-		catch {
+		catch (Exception $e) {
 			// nothing for now
 		}
 
