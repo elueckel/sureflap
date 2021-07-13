@@ -197,7 +197,7 @@ if (!defined('vtBoolean')) {
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
-		$result = json_decode(curl_exec($ch),true) /*or die("Curl Failed\n"*/);
+		$result = json_decode(curl_exec($ch),true) /*or die("Curl Failed\n")*/;
 		$this->RegisterVariableString('Pets', $this->Translate('Pets'),'', 40);
 
 		$i = 0;
@@ -270,7 +270,7 @@ if (!defined('vtBoolean')) {
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 					curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
-					$result = json_decode(curl_exec($ch),true)/* or die("Curl Failed\n" */);
+					$result = json_decode(curl_exec($ch),true)/* or die("Curl Failed\n")*/;
 					//var_dump ($result);
 				}	
 				catch (Exception $e) {
@@ -283,7 +283,7 @@ if (!defined('vtBoolean')) {
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 					curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 					curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
-					$result_device = json_decode(curl_exec($ch),true) /* or die("Curl Failed\n" */);
+					$result_device = json_decode(curl_exec($ch),true) /* or die("Curl Failed\n" )*/;
 					$Pet_LastDetectedByName = $result_device['data']['name'];
 				}
 				else {
@@ -326,7 +326,7 @@ if (!defined('vtBoolean')) {
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
-		$result = json_decode(curl_exec($ch),true) /* or die("Curl Failed\n" */);
+		$result = json_decode(curl_exec($ch),true) /* or die("Curl Failed\n")*/;
 		//var_dump($result['data']);
 		}	
 		catch (Exception $e) {
