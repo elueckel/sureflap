@@ -76,7 +76,7 @@ if (!defined('vtBoolean')) {
 			curl_setopt($ch, CURLOPT_VERBOSE, 0);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json","Content-Length: ".strlen($json)));
-			$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
+			$result = json_decode(curl_exec($ch),true) /*or die("Curl Failed\n")*/;
 			if($result['data']['token']) {
 				$token = $result['data']['token'];
 				$this->SendDebug($this->Translate('AccessSureFlap'),$this->Translate('Token '.$token),0);
@@ -106,7 +106,7 @@ if (!defined('vtBoolean')) {
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
-		$result = json_decode(curl_exec($ch),true) or die("Curl Failed\n");
+		$result = json_decode(curl_exec($ch),true) /*or die("Curl Failed\n")*/;
 
 		if($result['data']) {
 			$this->SendDebug($this->Translate('Detecting Household'),'Household ID: '.$result['data'][0]['id'].' - Household Name: '.$result['data'][0]['name'],0);
