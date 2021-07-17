@@ -77,9 +77,11 @@ if (!defined('vtBoolean')) {
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json","Content-Length: ".strlen($json)));
 			$result = json_decode(curl_exec($ch),true) /*or die("Curl Failed\n")*/;
-			if($result['data']['token']) {
-				$token = $result['data']['token'];
-				$this->SendDebug($this->Translate('AccessSureFlap'),$this->Translate('Token '.$token),0);
+			if (isset($result)) {
+				if($result['data']['token']) {
+					$token = $result['data']['token'];
+					$this->SendDebug($this->Translate('AccessSureFlap'),$this->Translate('Token '.$token),0);
+				}
 			}
 
 			$this->SetBuffer("SureFlapToken",$token);
