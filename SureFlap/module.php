@@ -81,10 +81,10 @@ if (!defined('vtBoolean')) {
 				if($result['data']['token']) {
 					$token = $result['data']['token'];
 					$this->SendDebug($this->Translate('AccessSureFlap'),$this->Translate('Token '.$token),0);
+					$this->SetBuffer("SureFlapToken",$token);
 				}
 			}
-
-			$this->SetBuffer("SureFlapToken",$token);
+			
 		}
 		else {
 			$this->SendDebug($this->Translate('AccessSureFlap'),$this->Translate('Login data is missing'),0);
@@ -291,20 +291,21 @@ if (!defined('vtBoolean')) {
 				else {
 					$Pet_LastDetectedByName = $this->Translate('No movement detected');
 				}
-
-				if($result['data']) {
-					if($result['data']['where']=="1") {
-						$location = "Inside";
-						SetValue($this->GetIDForIdent($i.'Pet_Location'), 1);
-						$this->SendDebug($this->Translate('Pet Location '),$Name.' Inside',0);
-						SetValue($this->GetIDForIdent($i.'Pet_LastDetectedBy'), $Pet_LastDetectedByName);
-						$this->SendDebug($this->Translate('Pet last detected by '),$Pet_LastDetectedByName,0);
-					} else {
-						SetValue($this->GetIDForIdent($i.'Pet_Location'), 0);
-						$this->SendDebug($this->Translate('Pet Location '),$Name.' Outside',0);
-						SetValue($this->GetIDForIdent($i.'Pet_LastDetectedBy'), $Pet_LastDetectedByName);
-						$this->SendDebug($this->Translate('Pet last detected by '),$Pet_LastDetectedByName,0);
-					}				
+				if (isset($result)) {
+					if($result['data']) {
+						if($result['data']['where']=="1") {
+							$location = "Inside";
+							SetValue($this->GetIDForIdent($i.'Pet_Location'), 1);
+							$this->SendDebug($this->Translate('Pet Location '),$Name.' Inside',0);
+							SetValue($this->GetIDForIdent($i.'Pet_LastDetectedBy'), $Pet_LastDetectedByName);
+							$this->SendDebug($this->Translate('Pet last detected by '),$Pet_LastDetectedByName,0);
+						} else {
+							SetValue($this->GetIDForIdent($i.'Pet_Location'), 0);
+							$this->SendDebug($this->Translate('Pet Location '),$Name.' Outside',0);
+							SetValue($this->GetIDForIdent($i.'Pet_LastDetectedBy'), $Pet_LastDetectedByName);
+							$this->SendDebug($this->Translate('Pet last detected by '),$Pet_LastDetectedByName,0);
+						}				
+					}
 				}
 
 				$i++;
