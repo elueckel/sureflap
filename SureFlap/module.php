@@ -322,8 +322,7 @@ if (!defined('vtBoolean')) {
 		$household = GetValue($this->GetIDForIdent ('Household_ID'));
 		$token = $this->GetBuffer("SureFlapToken");
 		//$flapname = GetValue($this->GetIDForIdent ('1Device_Name'));
-		
-		try {
+
 		$ch = curl_init("https://app.api.surehub.io/api/household/$household/device?with[]=control");
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -331,28 +330,26 @@ if (!defined('vtBoolean')) {
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $token"));
 		$result = json_decode(curl_exec($ch),true) /* or die("Curl Failed\n")*/;
 		//var_dump($result['data']);
-		}	
-		catch (Exception $e) {
-			// nothing for now
-		}
-
+		
 		$i = 0; 
 
-		if($result['data']) {
-			foreach($result['data'] as $device) {
-				$i++;
-				if ($device["product_id"] == 6){
-					$flapname = ($device["name"]);
-					if($device['control']['locking']=="0") {
-						SetValue($this->GetIDForIdent($i.'Device_Status'), 1);
-						$this->SendDebug($this->Translate('Device Status'),'Enabled',0);
-					} else {
-						SetValue($this->GetIDForIdent($i.'Device_Status'), 0);
-						$this->SendDebug($this->Translate('Device Status'),'Disabled',0);
+		if (isset($result)) {
+			if($result['data']) {
+				foreach($result['data'] as $device) {
+					$i++;
+					if ($device["product_id"] == 6){
+						$flapname = ($device["name"]);
+						if($device['control']['locking']=="0") {
+							SetValue($this->GetIDForIdent($i.'Device_Status'), 1);
+							$this->SendDebug($this->Translate('Device Status'),'Enabled',0);
+						} else {
+							SetValue($this->GetIDForIdent($i.'Device_Status'), 0);
+							$this->SendDebug($this->Translate('Device Status'),'Disabled',0);
+						}
 					}
 				}
-				
-			}
+			}			
+	
 		}
 	}
 
